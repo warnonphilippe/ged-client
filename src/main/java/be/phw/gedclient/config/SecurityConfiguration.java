@@ -29,34 +29,22 @@ public class SecurityConfiguration extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http
-            .csrf()
-            .disable()
-            .exceptionHandling()
-            .authenticationEntryPoint(problemSupport)
-            .accessDeniedHandler(problemSupport)
-        .and()
-            .headers()
-            .frameOptions()
-            .disable()
-        .and()
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
-            .authorizeRequests()
-            .antMatchers("/api/**").authenticated()
-            .antMatchers("/management/health").permitAll()
-            .antMatchers("/management/info").permitAll()
-            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN);
+        http.csrf().disable().exceptionHandling().authenticationEntryPoint(problemSupport)
+                .accessDeniedHandler(problemSupport).and().headers().frameOptions().disable().and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests().antMatchers("/api/**")
+                .authenticated().antMatchers("/test/**").permitAll().antMatchers("/management/health").permitAll()
+                .antMatchers("/management/info").permitAll().antMatchers("/management/**")
+                .hasAuthority(AuthoritiesConstants.ADMIN);
 
     }
 
     /**
-     * This OAuth2RestTemplate is only used by AuthorizationHeaderUtil that is currently used by TokenRelayRequestInterceptor
+     * This OAuth2RestTemplate is only used by AuthorizationHeaderUtil that is
+     * currently used by TokenRelayRequestInterceptor
      */
     @Bean
     public OAuth2RestTemplate oAuth2RestTemplate(OAuth2ProtectedResourceDetails oAuth2ProtectedResourceDetails,
-        OAuth2ClientContext oAuth2ClientContext) {
+            OAuth2ClientContext oAuth2ClientContext) {
         return new OAuth2RestTemplate(oAuth2ProtectedResourceDetails, oAuth2ClientContext);
     }
 
