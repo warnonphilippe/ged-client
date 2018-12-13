@@ -10,8 +10,8 @@ public class DocumentMainFeignConfiguration { // extends OAuth2InterceptedFeignC
 
     @Bean
     public Contract feignContract() {
-        return new SpringMvcContract();
-        // return new feign.Contract.Default();
+        // return new SpringMvcContract();
+        return new feign.Contract.Default();
     }
 
     @Bean

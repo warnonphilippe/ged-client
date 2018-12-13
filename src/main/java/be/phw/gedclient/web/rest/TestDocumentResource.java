@@ -24,17 +24,21 @@ public class TestDocumentResource {
 
     private DocumentMainClient client;
 
-    @GetMapping("get")
+    public TestDocumentResource(DocumentMainClient client) {
+        this.client = client;
+    }
+
+    @GetMapping("/get")
     public ResponseEntity<List<CivadisDocument>> list() {
         return client.testDocuments("parent");
     }
 
-    @GetMapping("upload")
+    @GetMapping("/upload")
     public ResponseEntity<CivadisDocument> upload() throws IOException {
         return client.testUploadDocument(getFormData(new File("/Users/philippe/kafka.pptx")), "parenPath");
     }
 
-    @GetMapping("download")
+    @GetMapping("/download")
     public ResponseEntity<Boolean> download() {
         byte[] bytes = client.testDownloadDocument("id");
         return ResponseEntity.ok(true);
@@ -47,7 +51,7 @@ public class TestDocumentResource {
      * @return
      * @throws IOException
      */
-    public FormData getFormData(File file) throws IOException {
+    private FormData getFormData(File file) throws IOException {
         // bytes array
         byte[] bytesArray = new byte[(int) file.length()];
         FileInputStream fis = new FileInputStream(file);
