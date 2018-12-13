@@ -21,7 +21,7 @@ public interface DocumentMainClient {
 
     @RequestLine("POST /upload-document")
     @Headers("Content-Type: multipart/form-data")
-    public ResponseEntity<CivadisDocument> uploadDocument(@Param("file") FormData file,
+    public ResponseEntity<CivadisDocument> testUploadDocument(@Param("file") FormData file,
             @Param("parent") String parenPath);
 
     @RequestLine("GET /test-download-document")

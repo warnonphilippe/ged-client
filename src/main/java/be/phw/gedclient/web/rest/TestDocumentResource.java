@@ -30,9 +30,8 @@ public class TestDocumentResource {
     }
 
     @GetMapping("upload")
-    public ResponseEntity<Boolean> upload() {
-        // TODO...
-        return ResponseEntity.ok(true);
+    public ResponseEntity<CivadisDocument> upload() throws IOException {
+        return client.testUploadDocument(getFormData(new File("/Users/philippe/kafka.pptx")), "parenPath");
     }
 
     @GetMapping("download")
