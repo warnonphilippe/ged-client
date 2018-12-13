@@ -16,9 +16,10 @@ import feign.form.FormData;
 @FeignClient(name = "GEDSERVER", configuration = DocumentMainFeignConfiguration.class)
 public interface DocumentMainClient {
 
-    @RequestLine("GET /test/test-documents")
-    public ResponseEntity<List<CivadisDocument>> testDocuments(@Param("parent") String parent);
-
+    @RequestLine("GET /test/test-documents?parent={parent}")
+    //@GetMapping(path = "/test/test-documents")
+    public ResponseEntity<List<CivadisDocument>> testDocuments(@Param(value="parent") String parent);
+/*
     @RequestLine("POST /test/upload-document")
     @Headers("Content-Type: multipart/form-data")
     public ResponseEntity<CivadisDocument> testUploadDocument(@Param("file") FormData file,
@@ -27,5 +28,5 @@ public interface DocumentMainClient {
     @RequestLine("GET /test/test-download-document")
     @Headers("Accept: application/octect-stream")
     public byte[] testDownloadDocument(@Param("id") String id);
-
+*/
 }
