@@ -27,6 +27,7 @@ public interface DocumentMainClient {
     //TODO : test avec POST json
 
 
+    //TODO : voir pourqoi on ne passe pas dans le decoder
     @RequestLine("GET /test/test-download-document?id={id}")
     @Headers("Accept: application/octect-stream")
     public byte[] testDownloadDocument(@Param("id") String id);

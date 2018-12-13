@@ -23,8 +23,8 @@ public class DocumentMainFeignConfiguration { // extends OAuth2InterceptedFeignC
 
     @Bean
     public feign.codec.Decoder feignDecoder() {
-        return new feign.codec.Decoder.Default();
-        //return new ResponseEntityDecoder(new CustomGsonDecoder());
+        //return new feign.codec.Decoder.Default();
+        return new ResponseEntityDecoder(new CustomFileDecoder(new CustomGsonDecoder()));
     }
 
 }
