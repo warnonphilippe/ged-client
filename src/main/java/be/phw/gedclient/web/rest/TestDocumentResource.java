@@ -32,18 +32,21 @@ public class TestDocumentResource {
     public ResponseEntity<List<CivadisDocument>> list() {
         return client.testDocuments("parent");
     }
-/*
+
     @GetMapping("/upload")
     public ResponseEntity<CivadisDocument> upload() throws IOException {
-        return client.testUploadDocument(getFormData(new File("/Users/philippe/kafka.pptx")), "parenPath");
+        return client.testUploadDocument(getFormData(new File("/home/vagrant/testdoc")), "parenPath"); ///Users/philippe/kafka.pptx
     }
 
     @GetMapping("/download")
-    public ResponseEntity<Boolean> download() {
+    public ResponseEntity<Boolean> download() throws IOException {
         byte[] bytes = client.testDownloadDocument("id");
+        try (FileOutputStream out = new FileOutputStream(new File("/home/vagrant/testdownloaded"))){
+            out.write(bytes);
+        }
         return ResponseEntity.ok(true);
     }
-*/
+
     /**
      * Crée un FormData qui encapsule une fichier afin de permettre son transfert
      * 

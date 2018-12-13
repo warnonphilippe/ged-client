@@ -17,16 +17,18 @@ import feign.form.FormData;
 public interface DocumentMainClient {
 
     @RequestLine("GET /test/test-documents?parent={parent}")
-    //@GetMapping(path = "/test/test-documents")
     public ResponseEntity<List<CivadisDocument>> testDocuments(@Param(value="parent") String parent);
-/*
-    @RequestLine("POST /test/upload-document")
+
+    @RequestLine("POST /test/test-upload-document")
     @Headers("Content-Type: multipart/form-data")
     public ResponseEntity<CivadisDocument> testUploadDocument(@Param("file") FormData file,
             @Param("parent") String parenPath);
 
-    @RequestLine("GET /test/test-download-document")
+    //TODO : test avec POST json
+
+
+    @RequestLine("GET /test/test-download-document?id={id}")
     @Headers("Accept: application/octect-stream")
     public byte[] testDownloadDocument(@Param("id") String id);
-*/
+
 }
