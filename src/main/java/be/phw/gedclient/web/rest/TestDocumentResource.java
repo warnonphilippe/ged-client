@@ -35,13 +35,13 @@ public class TestDocumentResource {
 
     @GetMapping("/upload")
     public ResponseEntity<CivadisDocument> upload() throws IOException {
-        return client.testUploadDocument(getFormData(new File("/home/vagrant/testdoc")), "parenPath"); ///Users/philippe/kafka.pptx
+        return client.testUploadDocument(getFormData(new File("/Users/philippe/test.txt")), "parenPath"); /// home/vagrant/testdoc
     }
 
     @GetMapping("/download")
     public ResponseEntity<Boolean> download() throws IOException {
         byte[] bytes = client.testDownloadDocument("id");
-        try (FileOutputStream out = new FileOutputStream(new File("/home/vagrant/testdownloaded"))){
+        try (FileOutputStream out = new FileOutputStream(new File("/Users/philippe/testdownloaded"))) { /// home/vagrant/testdownloaded
             out.write(bytes);
         }
         return ResponseEntity.ok(true);
