@@ -19,12 +19,14 @@ public interface DocumentMainClient {
     @RequestLine("GET /test/test-documents?parent={parent}")
     public ResponseEntity<List<CivadisDocument>> testDocuments(@Param(value = "parent") String parent);
 
+    @RequestLine("POST /test/test-post-document")
+    @Headers("Content-Type: application/json")
+    public ResponseEntity<CivadisDocument> testPostDocument(CivadisDocument document);
+
     @RequestLine("POST /test/test-upload-document")
     @Headers("Content-Type: multipart/form-data")
     public ResponseEntity<CivadisDocument> testUploadDocument(@Param("file") FormData file,
             @Param("parent") String parenPath);
-
-    // TODO : test avec POST json
 
     @RequestLine("GET /test/test-download-document?id={id}")
     // @Headers("Accept: application/octect-stream")

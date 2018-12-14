@@ -3,6 +3,7 @@ package be.phw.gedclient.web.rest;
 import feign.form.FormData;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +32,14 @@ public class TestDocumentResource {
     @GetMapping("/get")
     public ResponseEntity<List<CivadisDocument>> list() {
         return client.testDocuments("parent");
+    }
+
+    // sert uniquement à déclencher le test via browser, donc get suffit
+    @GetMapping("/post")
+    public ResponseEntity<CivadisDocument> post() throws IOException {
+        CivadisDocument doc = new CivadisDocument();
+        doc.setName("docTest");
+        return client.testPostDocument(doc);
     }
 
     @GetMapping("/upload")
