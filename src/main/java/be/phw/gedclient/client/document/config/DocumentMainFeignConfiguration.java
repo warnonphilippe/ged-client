@@ -17,7 +17,12 @@ import be.phw.gedclient.config.ApplicationProperties;
 import be.phw.gedclient.security.oauth2.AuthorizationHeaderUtil;
 
 public class DocumentMainFeignConfiguration {
-
+    /*
+     * public DocumentMainFeignConfiguration(AuthorizationCodeResourceDetails
+     * authorizationCodeResourceDetails, ApplicationProperties
+     * applicationProperties) { super(authorizationCodeResourceDetails,
+     * applicationProperties); }
+     */
     @Bean
     public Contract feignContract() {
         // return new SpringMvcContract();
@@ -36,11 +41,11 @@ public class DocumentMainFeignConfiguration {
         return new ResponseEntityDecoder(new CustomFileDecoder(new CustomGsonDecoder()));
     }
 
-    /*
     @Bean(name = "gedRequestInterceptor")
-    public RequestInterceptor getGedRequestInterceptor(AuthorizationCodeResourceDetails authorizationCodeResourceDetails, ApplicationProperties applicationProperties) throws IOException {
+    public RequestInterceptor getGedRequestInterceptor(
+            AuthorizationCodeResourceDetails authorizationCodeResourceDetails,
+            ApplicationProperties applicationProperties) throws IOException {
         return new GedRequestInterceptor(authorizationCodeResourceDetails, applicationProperties);
     }
-    */
 
 }

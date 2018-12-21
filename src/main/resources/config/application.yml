@@ -127,7 +127,7 @@ security:
             user-authorization-uri: http://localhost:9080/auth/realms/jhipster/protocol/openid-connect/auth
             client-id: internal
             client-secret: internal
-            scope: openid profile email
+            scope: openid
         resource:
             user-info-uri: http://localhost:9080/auth/realms/jhipster/protocol/openid-connect/userinfo
 

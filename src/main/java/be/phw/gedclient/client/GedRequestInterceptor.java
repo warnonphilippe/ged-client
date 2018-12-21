@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -26,7 +27,8 @@ public class GedRequestInterceptor implements RequestInterceptor {
     private ApplicationProperties applicationProperties;
     private RestTemplate restTemplate;
 
-    public GedRequestInterceptor(AuthorizationCodeResourceDetails authorizationCodeResourceDetails, ApplicationProperties applicationProperties) {
+    public GedRequestInterceptor(AuthorizationCodeResourceDetails authorizationCodeResourceDetails,
+            ApplicationProperties applicationProperties) {
         super();
         this.authorizationCodeResourceDetails = authorizationCodeResourceDetails;
         this.applicationProperties = applicationProperties;
@@ -35,26 +37,30 @@ public class GedRequestInterceptor implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate template) {
-        //demander un token à keycloak et le joindre à la request
+        // demander un token à keycloak et le joindre à la request
         Optional<String> token = getToken();
-        if (token.isPresent()){
+        if (token.isPresent()) {
             template.header(AUTHORIZATION, String.format("%s %s", BEARER, token.get()));
         }
     }
 
-    private Optional<String> getToken(){
+    // TODO : gérer un stockage du token et son refresh
+    private Optional<String> getToken() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("username", applicationProperties.getGedUser());
         map.add("password", applicationProperties.getGedPassword());
         map.add("client_id", authorizationCodeResourceDetails.getClientId());
-        map.add("grant_type", "password");
+        map.add("client_secret", authorizationCodeResourceDetails.getClientSecret());
+        map.add("grant_type", "password"); // client_credentials
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(this.authorizationCodeResourceDetails.getAccessTokenUri(), request , String.class);
-        //TODO : extraire le token
-        System.out.println(response.getBody());
-        return Optional.empty();
-
+        ResponseEntity<OAuth2AccessToken> response = restTemplate.postForEntity(
+                this.authorizationCodeResourceDetails.getAccessTokenUri(), request, OAuth2AccessToken.class);
+        if (response != null && response.hasBody()) {
+            return Optional.ofNullable(response.getBody().getValue());
+        } else {
+            return Optional.empty();
+        }
     }
 }

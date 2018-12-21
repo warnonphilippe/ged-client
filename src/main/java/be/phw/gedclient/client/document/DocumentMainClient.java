@@ -14,7 +14,7 @@ import feign.Param;
 import feign.RequestLine;
 import feign.form.FormData;
 
-@FeignClient(name = "GED", configuration = {DocumentMainFeignConfiguration.class, AuthClientConfiguration.class})
+@FeignClient(name = "GEDSERVER", configuration = DocumentMainFeignConfiguration.class)
 public interface DocumentMainClient {
 
     @RequestLine("GET /test/test-documents?parent={parent}")
