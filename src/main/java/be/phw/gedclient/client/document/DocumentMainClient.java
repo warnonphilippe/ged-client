@@ -7,13 +7,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import be.phw.gedclient.client.document.config.AuthClientConfiguration;
 import be.phw.gedclient.client.document.config.DocumentMainFeignConfiguration;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
 import feign.form.FormData;
 
-@FeignClient(name = "GEDSERVER", configuration = DocumentMainFeignConfiguration.class)
+@FeignClient(name = "GED", configuration = {DocumentMainFeignConfiguration.class, AuthClientConfiguration.class})
 public interface DocumentMainClient {
 
     @RequestLine("GET /test/test-documents?parent={parent}")

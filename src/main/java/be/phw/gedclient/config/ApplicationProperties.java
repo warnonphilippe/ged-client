@@ -10,5 +10,40 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
+    private String gedUser;
+    private String gedPassword;
+
+    public ApplicationProperties() {
+    }
+
+    /**
+     * @return the gedPasword
+     */
+    public String getGedPassword() {
+        return gedPassword;
+    }
+
+    /**
+     * @param gedPassword the gedPasword to set
+     */
+    public void setGedPassword(String gedPassword) {
+        this.gedPassword = gedPassword;
+    }
+
+    /**
+     * @return the gedUser
+     */
+    public String getGedUser() {
+        return gedUser;
+    }
+
+    /**
+     * @param gedUser the gedUser to set
+     */
+    public void setGedUser(String gedUser) {
+        this.gedUser = gedUser;
+    }
+
+
 
 }
