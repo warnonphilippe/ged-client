@@ -36,9 +36,11 @@ public class DocumentMainFeignConfiguration {
         return new ResponseEntityDecoder(new CustomFileDecoder(new CustomGsonDecoder()));
     }
 
+    /*
     @Bean(name = "gedRequestInterceptor")
     public RequestInterceptor getGedRequestInterceptor(AuthorizationCodeResourceDetails authorizationCodeResourceDetails, ApplicationProperties applicationProperties) throws IOException {
         return new GedRequestInterceptor(authorizationCodeResourceDetails, applicationProperties);
     }
+    */
 
 }
