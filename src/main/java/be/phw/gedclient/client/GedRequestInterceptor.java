@@ -47,7 +47,7 @@ public class GedRequestInterceptor implements RequestInterceptor {
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
         map.add("username", applicationProperties.getGedUser());
-        map.add("password", applicationProperties.getGedPasword());
+        map.add("password", applicationProperties.getGedPassword());
         map.add("client_id", authorizationCodeResourceDetails.getClientId());
         map.add("grant_type", "password");
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
