@@ -12,7 +12,7 @@ import org.springframework.cloud.openfeign.support.SpringMvcContract;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 
-import be.phw.gedclient.client.GedRequestInterceptor;
+import be.phw.gedclient.client.document.GedRequestInterceptor;
 import be.phw.gedclient.config.ApplicationProperties;
 import be.phw.gedclient.security.oauth2.AuthorizationHeaderUtil;
 
