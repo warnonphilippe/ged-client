@@ -1,7 +1,6 @@
 package be.phw.gedclient.client.document.config;
 
 import be.phw.gedclient.config.ApplicationProperties;
-import be.phw.gedclient.security.oauth2.AuthorizationHeaderUtil;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
