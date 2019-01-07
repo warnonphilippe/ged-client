@@ -25,7 +25,7 @@ public interface DocumentMainClient {
      * @param name nom du nouveau répertoire
      * @return
      */
-    @RequestLine("GET /createFolder?parent={parent}&name={name}")
+    @RequestLine("GET /api/createFolder?parent={parent}&name={name}")
     public ResponseEntity<CivadisDocument> createFolder(
         @Param("parent") String parentId,
         @Param("name") String name);
@@ -35,7 +35,7 @@ public interface DocumentMainClient {
      * @param id id du document
      * @return
      */
-    @RequestLine("GET /document-detail?id={id}&path={path}&latest={latest}")
+    @RequestLine("GET /api/document-detail?id={id}&path={path}&latest={latest}")
     public ResponseEntity<CivadisDocument> getDocument(
         @Param("id") String id,
         @Param("path") String path,
@@ -46,7 +46,7 @@ public interface DocumentMainClient {
      * @param id id du document
      * @return
      */
-    @RequestLine("GET /document-all-versions?id={id}")
+    @RequestLine("GET /api/document-all-versions?id={id}")
     public ResponseEntity<List<CivadisDocument>> getDocumentAllVersions(
         @Param("id") String id);
 
@@ -55,7 +55,7 @@ public interface DocumentMainClient {
      * @param parent id du répertoire parent
      * @return
      */
-    @RequestLine("GET /documents?parent={parent}")
+    @RequestLine("GET /api/documents?parent={parent}")
     public ResponseEntity<List<CivadisDocument>> getDocuments(
         @Param("parent") String parent);
 
@@ -69,7 +69,7 @@ public interface DocumentMainClient {
      * @param searchTypeContent type de recherche (OR, AND, PHRASE)
      * @return
      */
-    @RequestLine("GET /documents-by-content?parent={parent}&valueContent={valueContent}&searchTypeContent={searchTypeContent}")
+    @RequestLine("GET /api/documents-by-content?parent={parent}&valueContent={valueContent}&searchTypeContent={searchTypeContent}")
     public ResponseEntity<List<CivadisDocument>> getDocumentsByContent(
         @Param("parent") String parent,
         @Param("valueContent") String valueContent,
@@ -84,7 +84,7 @@ public interface DocumentMainClient {
      * @param searchTypeTags type de recherche (OR, AND)
      * @return
      */
-    @RequestLine("GET /documents-by-tags?parent={parent}&valueTags={valueTags}&searchTypeTags={searchTypeTags}")
+    @RequestLine("GET /api/documents-by-tags?parent={parent}&valueTags={valueTags}&searchTypeTags={searchTypeTags}")
     public ResponseEntity<List<CivadisDocument>> getDocumentsByTags(
         @Param("parent") String parent,
         @Param("valueTags") String valueTags,
@@ -107,7 +107,7 @@ public interface DocumentMainClient {
      * @param searchTypeTags type de recherche (OR, AND)
      * @return
      */
-    @RequestLine("GET /documents-by-content-tags?parent={parent}&valueContent={valueContent}&searchTypeContent={searchTypeContent}&valueTags={valueTags}&searchTypeTags={searchTypeTags}")
+    @RequestLine("GET /api/documents-by-content-tags?parent={parent}&valueContent={valueContent}&searchTypeContent={searchTypeContent}&valueTags={valueTags}&searchTypeTags={searchTypeTags}")
     public ResponseEntity<List<CivadisDocument>> searchDocuments(
         @Param("parent") String parent,
         @Param("valueContent") String valueContent,
@@ -121,7 +121,7 @@ public interface DocumentMainClient {
      * @param latest indique si on dowload la dernière version du document, sinon celle associée au no de version présent dans l'id
      * @return
      */
-    @RequestLine("GET /download-document?id={id}&latest={latest}")
+    @RequestLine("GET /api/download-document?id={id}&latest={latest}")
     public byte[] downloadDocument(
         @Param("id") String id,
         @Param("latest") Boolean latest);
@@ -133,7 +133,7 @@ public interface DocumentMainClient {
     * @param description description du fichier
     * @return
     */
-    @RequestLine("POST /upload-document")
+    @RequestLine("POST /api/upload-document")
     @Headers("Content-Type: multipart/form-data")
     public ResponseEntity<CivadisDocument> uploadDocument(@Param("file") FormData file, @Param("parent") String parenPath, @Param("description") String description);
     
@@ -146,7 +146,7 @@ public interface DocumentMainClient {
      * @param engineType type de moteur de conversion (office ou libreoffice)
      * @return
      */
-    @RequestLine("POST /upload-convert-document")
+    @RequestLine("POST /api/upload-convert-document")
     @Headers("Content-Type: multipart/form-data")
     public ResponseEntity<TicketInfo> uploadDocument(
         @Param("file") FormData file,
@@ -159,7 +159,7 @@ public interface DocumentMainClient {
      * Suppression d'un document
      * @param id id du document à supprimé
      */
-    @RequestLine("DELETE /delete-document?id={id}")
+    @RequestLine("DELETE /api/delete-document?id={id}")
     public ResponseEntity deleteDocument(
         @Param("id") String id);
 
@@ -175,7 +175,7 @@ public interface DocumentMainClient {
      * @param readOnly indique si édition en readonly
      * @return
      */
-    @RequestLine("GET /editUrl?id={id}&mergeFieldsId={mergeFieldsId}&readOnly={readOnly}")
+    @RequestLine("GET /api/editUrl?id={id}&mergeFieldsId={mergeFieldsId}&readOnly={readOnly}")
     @Headers("Accept: text/plain")
     public String getEditUrl(
         @Param("id") String id,
@@ -189,7 +189,7 @@ public interface DocumentMainClient {
      * @param readOnly indique si edition en readonly
      * @return
      */
-    @RequestLine("GET /webdavOdt?id={id}&mergeFieldsId={mergeFieldsId}&readOnly={readOnly}")
+    @RequestLine("GET /api/webdavOdt?id={id}&mergeFieldsId={mergeFieldsId}&readOnly={readOnly}")
     public byte[] getWebdavOdt(
         @Param("id") String id,
         @Param("mergeFieldsId") String mergeFieldsId,
@@ -199,7 +199,7 @@ public interface DocumentMainClient {
      * Télécharge l'extension à installer dans libre office
      * @return
      */
-    @RequestLine("GET /webdavOdtExt")
+    @RequestLine("GET /api/webdavOdtExt")
     public byte[] getWebdavOdt();
 
     /**
@@ -209,7 +209,7 @@ public interface DocumentMainClient {
      * @param readOnly indique si edition en readonly
      * @return
      */
-    @RequestLine("GET /webdavDocm?id={id}&mergeFieldsId={mergeFieldsId}&readOnly={readOnly}")
+    @RequestLine("GET /api/webdavDocm?id={id}&mergeFieldsId={mergeFieldsId}&readOnly={readOnly}")
     public byte[] getWebdavDocm(
         @Param("id") String id,
         @Param("mergeFieldsId") String mergeFieldsId,
@@ -226,13 +226,13 @@ public interface DocumentMainClient {
      * @return
      * @throws Exception
      */
-    @RequestLine("GET /convert?id={id}&targetName={targetName}&engineType={engineType}")
+    @RequestLine("GET /api/convert?id={id}&targetName={targetName}&engineType={engineType}")
     public ResponseEntity<TicketInfo> convert(
         @Param("id") String id,
         @Param("targetName") String targetName,
         @Param("engineType") String engineType) throws Exception;
 
-    @RequestLine("POST /convertStream")
+    @RequestLine("POST /api/convertStream")
     @Headers("Content-Type: multipart/form-data")
     public byte[] convert(
         @Param("file") File file,
@@ -252,7 +252,7 @@ public interface DocumentMainClient {
      * @return
      * @throws Exception
      */
-    @RequestLine("POST /merge?templateId={templateId}&mergeType={mergeType}&destPath={destPath}")
+    @RequestLine("POST /api/merge?templateId={templateId}&mergeType={mergeType}&destPath={destPath}")
     @Headers("Content-Type: application/json")
     public ResponseEntity<TicketInfo> merge(
         @Param("templateId") String templateId,
@@ -265,10 +265,10 @@ public interface DocumentMainClient {
     /***********************************************************/
     /** Ticket-service ******************************************/
     /***********************************************************/
-    @RequestLine("GET /ticket-conversions/{id}")
+    @RequestLine("GET /api/ticket-conversions/{id}")
     public ResponseEntity<TicketConversion> getTicketConversion(@Param("id") Long id);
 
-    @RequestLine("GET /ticket-merges/{id}")
+    @RequestLine("GET /api/ticket-merges/{id}")
     public ResponseEntity<TicketMerge> getTicketMerge(@Param("id") Long id);
 
 
@@ -283,7 +283,7 @@ public interface DocumentMainClient {
      * @param path
      * @return
      * */
-    @RequestLine("GET /checkout-document?id={id}&path={path}")
+    @RequestLine("GET /api/checkout-document?id={id}&path={path}")
     public ResponseEntity<CivadisDocument> checkOutLatestDocument(
         @Param("id") String id,
         @Param("path") String path);
@@ -293,7 +293,7 @@ public interface DocumentMainClient {
      * @param id id du document
      * @return
      */
-    @RequestLine("GET /is-document-checked-out?id={id}&path={path}")
+    @RequestLine("GET /api/is-document-checked-out?id={id}&path={path}")
     public ResponseEntity<Boolean> isDocumentCheckedOut(
         @Param("id") String id,
         @Param("path") String path);
@@ -303,7 +303,7 @@ public interface DocumentMainClient {
      * @param id id du document
      * @return
      */
-    @RequestLine("GET /cancel-document-checkout?id={id}")
+    @RequestLine("GET /api/cancel-document-checkout?id={id}")
     public ResponseEntity<Boolean> cancelDocumentCheckOut(
         @Param("id") String id);
     
@@ -313,7 +313,7 @@ public interface DocumentMainClient {
      * @param parenPath path sous lequel placé le fichier
      * @param description description du fichier
      */
-    @RequestLine("POST /upload-checkin-document")
+    @RequestLine("POST /api/upload-checkin-document")
     @Headers("Content-Type: multipart/form-data")
     public ResponseEntity<CivadisDocument> uploadCheckInDocument(
         @Param("file") FormData file,
