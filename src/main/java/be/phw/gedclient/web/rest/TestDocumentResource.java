@@ -202,7 +202,7 @@ public class TestDocumentResource {
                             ticketConversion -> {
                                 System.out.println("Error (1): " + ticketConversion.getErrorMsg());
                             });
-                    }
+                        }
 
                 }
             } catch (Exception ex){
