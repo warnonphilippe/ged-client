@@ -16,7 +16,7 @@ import be.phw.gedclient.client.document.ticket.TicketConversion;
 import be.phw.gedclient.client.document.ticket.TicketInfo;
 import be.phw.gedclient.client.document.ticket.TicketMerge;
 
-@FeignClient(name = "GED", configuration = DocumentMainFeignConfiguration.class)
+@FeignClient(name = "GEDSERVER", configuration = DocumentMainFeignConfiguration.class)
 public interface DocumentMainClient {
 
     /**
