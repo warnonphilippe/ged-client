@@ -64,13 +64,11 @@ public class TestDocumentResource {
         testUpload("/Users/philippe/tmp/test1.docx");
         testBase();
 
-        //TODO : compléter tests (corriger ressource pour download,...)
-
-        //testDownload("92b4002e-4d13-48a7-b9ba-9c16467db27e;1.0", "/Users/philippe/tmp/test_donwloaded.docx");
+        testDownload("92b4002e-4d13-48a7-b9ba-9c16467db27e;1.0", "/Users/philippe/tmp/test_donwloaded.docx");
         
-        //testMerge();
+        testMerge();
 
-        //testAllConvert("test1", "docx", "", null);
+        testAllConvert("test1", "docx", "", null);
 
         return ResponseEntity.ok(true);
     }
